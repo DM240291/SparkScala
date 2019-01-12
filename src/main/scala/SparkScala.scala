@@ -6,9 +6,9 @@ object SparkScala extends App {
   Logger.getLogger("org").setLevel(Level.ERROR)
   Logger.getLogger("akka").setLevel(Level.ERROR)
 
-//  val sparkConf = new SparkConf().setMaster("local").setAppName("MySparkCode")
-//
-//  val spark = new SparkContext(sparkConf)
+  //  val sparkConf = new SparkConf().setMaster("local").setAppName("MySparkCode")
+  //
+  //  val spark = new SparkContext(sparkConf)
 
   val sparkSession = new sql.SparkSession.Builder().master("local").appName("MySparkSql").getOrCreate()
 
@@ -16,16 +16,16 @@ object SparkScala extends App {
 
   data.show()
 
-//  Find number of people working in management
-  def getPeopleWorkingInDepartment(data : sql.DataFrame, departmentName: String)  : Int =  {
-    val dataCount = data.groupBy("job").count().filter("job = '"+departmentName+"'")
+  //  Find number of people working in management
+  def getPeopleWorkingInDepartment(data: sql.DataFrame, departmentName: String): Int = {
+    val dataCount = data.groupBy("job").count().filter("job = '" + departmentName + "'")
     val finalCount = String.valueOf(dataCount.select("count").first().get(0))
     return Integer.valueOf(finalCount)
   }
 
-  val countData = this.getPeopleWorkingInDepartment(data,"technician")
+  val countData = this.getPeopleWorkingInDepartment(data, "technician")
 
   print(countData)
-//  Find the number of people working as entrepreneur and are less than 40 years old
+  //  Find the number of people working as entrepreneur and are less than 40 years old
 
 }
