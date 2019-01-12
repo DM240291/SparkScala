@@ -16,4 +16,16 @@ object SparkScala extends App {
 
   data.show()
 
+//  Find number of people working in management
+  def getPeopleWorkingInDepartment(data : sql.DataFrame, departmentName: String)  : Int =  {
+    val dataCount = data.groupBy("job").count().filter("job = '"+departmentName+"'")
+    val finalCount = String.valueOf(dataCount.select("count").first().get(0))
+    return Integer.valueOf(finalCount)
+  }
+
+  val countData = this.getPeopleWorkingInDepartment(data,"technician")
+
+  print(countData)
+//  Find the number of people working as entrepreneur and are less than 40 years old
+
 }
