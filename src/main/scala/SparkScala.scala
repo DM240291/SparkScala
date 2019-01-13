@@ -25,7 +25,11 @@ object SparkScala extends App {
 
   val countData = this.getPeopleWorkingInDepartment(data, "technician")
 
-  print(countData)
+  //  print(countData)
+
   //  Find the number of people working as entrepreneur and are less than 40 years old
 
+  val ageWiseData = data.filter("age < 40 and job = 'entrepreneur'").count()
+
+  print(ageWiseData)
 }
